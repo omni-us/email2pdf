@@ -682,7 +682,11 @@ def get_utf8_header(header):
     hdr = ""
     for element in decoded_header:
         if isinstance(element[0], bytes):
-            hdr += str(element[0], element[1] or 'ASCII')
+            if element[1] == 'unknown-8bit':
+                encoding = 'utf-8'
+        else:
+                encoding = element[1]
+            hdr += str(element[0], encoding or 'ASCII')
         else:
             hdr += element[0]
     return hdr
