@@ -729,7 +729,7 @@ def call_main(argv, syslog_handler, syserr_handler):
         sys.exit(1)
 
 
-def convert(input_file, output_path, output_filename):
+def convert(input_file, output_path, output_filename, argv_input):
 
     logger_setup = logging.getLogger("email2pdf")
     logger_setup.propagate = False
@@ -765,11 +765,10 @@ def convert(input_file, output_path, output_filename):
         '-d',
         output_path,
         '-o',
-        output_filename,
-        '--headers'
+        output_filename
     ]
 
-    call_main(argv, syslog_handler_setup, syserr_handler_setup)
+    call_main(argv + argv_input, syslog_handler_setup, syserr_handler_setup)
 
 
 if __name__ == "__main__":
